@@ -20,7 +20,7 @@ https://ip:port/api/v1/item/id  ->  HTTP.DELETE  (delete by id)
 ->Item details
 
 Task {
-int ID
+int ID;
 string Name;
 string Details;
 time Date;
