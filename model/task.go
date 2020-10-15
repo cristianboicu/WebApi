@@ -1,12 +1,10 @@
-package models
-
-import "time"
+package model
 
 //Task model structure...
 type Task struct {
 	ID      int
-	name    string
-	details string
-	date    time.Time
-	done    bool
+	Name    string
+	Details string
+	Date    string
+	Done    int
 }

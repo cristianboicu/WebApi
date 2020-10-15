@@ -1,22 +1,34 @@
 package main
 
 import (
-	"log"
+	"fmt"
+	"todoapi/database"
+	"todoapi/model"
 
-	"github.com/gofiber/fiber/v2"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
 
-	app := fiber.New()
+	database.Connect()
 
-	app.Get("/", hello)
+	// task := model.Task{
+	// 	Name:    "Go to shop",
+	// 	Details: "Buy some shit",
+	// }
 
-	log.Fatal(app.Listen(":3000"))
+	newTask := model.Task{
+		Details: "Fuck some pussy",
+		Done:    0,
+	}
 
-	//defer DB.Close()
-}
+	//database.InsertNewTask(database.DB, task)
+	database.UpdateTaskByID(database.DB, 37, newTask)
+	database.DeleteTaskByID(database.DB, 37)
 
-func hello(c *fiber.Ctx) error {
-	return c.SendString("Hello Sergan")
+	s := database.GetAllTasks(database.DB)
+
+	fmt.Println(s)
+
+	defer database.DB.Close()
 }

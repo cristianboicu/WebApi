@@ -2,9 +2,7 @@ package database
 
 import (
 	"database/sql"
-	"fmt"
-
-	_ "github.com/mattn/go-sqlite3"
+	"log"
 )
 
 //DB -> database variable
@@ -14,13 +12,11 @@ var DB *sql.DB
 func Connect() error {
 	var err error
 
-	DB, err = sql.Open("sqlite3", "./sqlite-database.db")
+	DB, err = sql.Open("sqlite3", "database/sqlite-database.db")
 
 	if err != nil {
-		fmt.Println("Error connect to database")
+		log.Fatal(err)
 	}
 
-	CreateTaskTable()
-	fmt.Println("Connection to db opened")
-	return nil
+	return err
 }
