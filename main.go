@@ -1,34 +1,23 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"todoapi/database"
-	"todoapi/model"
+	"todoapi/routes"
 
+	"github.com/gofiber/fiber/v2"
 	_ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
 
+	app := fiber.New()
+
 	database.Connect()
 
-	// task := model.Task{
-	// 	Name:    "Go to shop",
-	// 	Details: "Buy some shit",
-	// }
+	routes.SetupRoutes(app)
 
-	newTask := model.Task{
-		Details: "Fuck some pussy",
-		Done:    0,
-	}
-
-	//database.InsertNewTask(database.DB, task)
-	database.UpdateTaskByID(database.DB, 37, newTask)
-	database.DeleteTaskByID(database.DB, 37)
-
-	s := database.GetAllTasks(database.DB)
-
-	fmt.Println(s)
+	log.Fatal(app.Listen("192.168.1.221:9876"))
 
 	defer database.DB.Close()
 }

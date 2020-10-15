@@ -2,9 +2,9 @@ package model
 
 //Task model structure...
 type Task struct {
-	ID      int
-	Name    string
-	Details string
-	Date    string
-	Done    int
+	ID      int    `json:"id"`
+	Name    string `json:"name"`
+	Details string `json:"details"`
+	Date    string `json:"date"`
+	Done    int    `json:"done"`
 }
