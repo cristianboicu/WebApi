@@ -17,7 +17,7 @@ func main() {
 
 	routes.SetupRoutes(app)
 
-	log.Fatal(app.Listen("192.168.1.221:9876"))
+	log.Fatal(app.Listen(":9876"))
 
 	defer database.DB.Close()
 }
